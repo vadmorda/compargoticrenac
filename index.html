@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad Arte Gótico y Renacimiento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 20px;
+        }
+        .image-container {
+            width: 45%;
+            border: 2px solid black;
+            padding: 10px;
+            min-height: 400px;
+        }
+        .draggable {
+            padding: 8px;
+            margin: 5px;
+            background-color: lightblue;
+            border: 1px solid black;
+            cursor: grab;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coloca las características en la imagen correcta</h1>
+    <p>Arrastra cada característica y suéltala sobre la imagen correspondiente.</p>
+    <div class="container">
+        <div class="image-container" id="gothic">
+            <h3>Arte Gótico</h3>
+            <img src="https://i.imgur.com/Mqn0g20.jpeg" width="300px">
+        </div>
+        <div class="image-container" id="renaissance">
+            <h3>Arte del Renacimiento</h3>
+            <img src="https://i.imgur.com/lWLupgt.jpeg" width="300px">
+        </div>
+    </div>
+    <div id="elements">
+        <div class="draggable" draggable="true">Arco apuntado u ojival</div>
+        <div class="draggable" draggable="true">Bóvedas de crucería</div>
+        <div class="draggable" draggable="true">Grandes vidrieras</div>
+        <div class="draggable" draggable="true">Altura y verticalidad</div>
+        <div class="draggable" draggable="true">Gárgolas decorativas</div>
+        <div class="draggable" draggable="true">Escultura alargada y expresiva</div>
+        <div class="draggable" draggable="true">Pintura con fondos dorados</div>
+        <div class="draggable" draggable="true">Influencia religiosa predominante</div>
+        <div class="draggable" draggable="true">Arco de medio punto</div>
+        <div class="draggable" draggable="true">Cúpulas y proporciones matemáticas</div>
+        <div class="draggable" draggable="true">Uso de la perspectiva en la pintura</div>
+        <div class="draggable" draggable="true">Equilibrio y armonía</div>
+        <div class="draggable" draggable="true">Inspiración en la Antigüedad clásica</div>
+        <div class="draggable" draggable="true">Escultura con anatomía realista</div>
+        <div class="draggable" draggable="true">Pintura con paisajes y luz natural</div>
+        <div class="draggable" draggable="true">Temática mitológica y humanista</div>
+    </div>
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const containers = document.querySelectorAll('.image-container');
+
+        draggables.forEach(item => {
+            item.addEventListener('dragstart', () => {
+                item.classList.add('dragging');
+            });
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+            });
+        });
+
+        containers.forEach(container => {
+            container.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                const dragging = document.querySelector('.dragging');
+                container.appendChild(dragging);
+            });
+        });
+    </script>
+</body>
+</html>
