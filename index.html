@@ -29,6 +29,14 @@
             cursor: grab;
             display: inline-block;
         }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -45,23 +53,25 @@
         </div>
     </div>
     <div id="elements">
-        <div class="draggable" draggable="true">Arco apuntado u ojival</div>
-        <div class="draggable" draggable="true">Bóvedas de crucería</div>
-        <div class="draggable" draggable="true">Grandes vidrieras</div>
-        <div class="draggable" draggable="true">Altura y verticalidad</div>
-        <div class="draggable" draggable="true">Gárgolas decorativas</div>
-        <div class="draggable" draggable="true">Escultura alargada y expresiva</div>
-        <div class="draggable" draggable="true">Pintura con fondos dorados</div>
-        <div class="draggable" draggable="true">Influencia religiosa predominante</div>
-        <div class="draggable" draggable="true">Arco de medio punto</div>
-        <div class="draggable" draggable="true">Cúpulas y proporciones matemáticas</div>
-        <div class="draggable" draggable="true">Uso de la perspectiva en la pintura</div>
-        <div class="draggable" draggable="true">Equilibrio y armonía</div>
-        <div class="draggable" draggable="true">Inspiración en la Antigüedad clásica</div>
-        <div class="draggable" draggable="true">Escultura con anatomía realista</div>
-        <div class="draggable" draggable="true">Pintura con paisajes y luz natural</div>
-        <div class="draggable" draggable="true">Temática mitológica y humanista</div>
+        <div class="draggable" draggable="true" data-category="gothic">Arco apuntado u ojival</div>
+        <div class="draggable" draggable="true" data-category="gothic">Bóvedas de crucería</div>
+        <div class="draggable" draggable="true" data-category="gothic">Grandes vidrieras</div>
+        <div class="draggable" draggable="true" data-category="gothic">Altura y verticalidad</div>
+        <div class="draggable" draggable="true" data-category="gothic">Gárgolas decorativas</div>
+        <div class="draggable" draggable="true" data-category="gothic">Escultura alargada y expresiva</div>
+        <div class="draggable" draggable="true" data-category="gothic">Pintura con fondos dorados</div>
+        <div class="draggable" draggable="true" data-category="gothic">Influencia religiosa predominante</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Arco de medio punto</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Cúpulas y proporciones matemáticas</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Uso de la perspectiva en la pintura</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Equilibrio y armonía</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Inspiración en la Antigüedad clásica</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Escultura con anatomía realista</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Pintura con paisajes y luz natural</div>
+        <div class="draggable" draggable="true" data-category="renaissance">Temática mitológica y humanista</div>
     </div>
+    <button class="button" onclick="checkAnswers()">Verificar respuestas</button>
+    <p id="result"></p>
     <script>
         const draggables = document.querySelectorAll('.draggable');
         const containers = document.querySelectorAll('.image-container');
@@ -82,6 +92,21 @@
                 container.appendChild(dragging);
             });
         });
+
+        function checkAnswers() {
+            let errors = 0;
+            draggables.forEach(item => {
+                const parent = item.parentElement.id;
+                const category = item.getAttribute('data-category');
+                if ((parent === 'gothic' && category !== 'gothic') || (parent === 'renaissance' && category !== 'renaissance')) {
+                    errors++;
+                    item.style.backgroundColor = 'red';
+                } else {
+                    item.style.backgroundColor = 'lightgreen';
+                }
+            });
+            document.getElementById('result').textContent = errors === 0 ? "¡Todo correcto!" : `Tienes ${errors} errores. Intenta corregirlos.`;
+        }
     </script>
 </body>
 </html>
